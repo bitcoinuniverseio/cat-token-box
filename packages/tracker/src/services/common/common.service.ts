@@ -60,6 +60,16 @@ export class CommonService {
     return resp?.data?.result;
   }
 
+  public async getCanonicalBlockHash(height: number): Promise<string> {
+    if (!Number.isSafeInteger(height) || height < 0)
+      throw new Error('Invalid checkpoint height');
+    const response = await this.rpcService.getBlockHash(height);
+    const hash = response?.data?.result;
+    if (typeof hash !== 'string' || !/^[a-f0-9]{64}$/.test(hash))
+      throw new Error('Canonical checkpoint hash unavailable');
+    return hash;
+  }
+
   /**
    * Parse token outputs from guard input of a transfer tx
    */
