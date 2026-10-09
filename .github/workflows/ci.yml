@@ -4,7 +4,7 @@ on: push
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, universe-runners-1]
     steps:
       - name: Prepare git
         run: git config --global core.autocrlf false

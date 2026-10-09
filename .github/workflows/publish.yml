@@ -8,7 +8,7 @@ name: Publish to NPM
 jobs:
   build:
     name: Publish to NPM
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, universe-runners-1]
     steps:
       - name: Prepare git
         run: git config --global core.autocrlf false
