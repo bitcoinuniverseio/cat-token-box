@@ -89,7 +89,7 @@ export class TxService {
 
     const startTs = Date.now();
     try {
-      this.updateSpent(tx);
+      await this.updateSpent(tx);
       let stateHashes: Buffer[];
 
       // search Guard inputs
@@ -144,6 +144,7 @@ export class TxService {
           this.logger.log(`skip tx ${tx.getId()}, ${e.message}`);
         } else {
           this.logger.error(`process tx ${tx.getId()} error, ${e.message}`);
+          throw e;
         }
       }
     }
